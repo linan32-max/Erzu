@@ -1,0 +1,5 @@
+package etl
+
+object Devicetype {
+
+}
