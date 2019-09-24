@@ -11,12 +11,12 @@ object TagsContext2 {
       .master("local[*]")
       .getOrCreate()
     // 读取字典文件
-    val docsRDD = spark.sparkContext.textFile("").map(_.split("\\s")).filter(_.length>=5)
+    val docsRDD = spark.sparkContext.textFile("zidian.txt").map(_.split("\\s")).filter(_.length>=5)
       .map(arr=>(arr(4),arr(1))).collectAsMap()
     // 广播字典
     val broadValue = spark.sparkContext.broadcast(docsRDD)
     // 读取停用词典
-    val stopwordsRDD = spark.sparkContext.textFile("").map((_,0)).collectAsMap()
+    val stopwordsRDD = spark.sparkContext.textFile("word.txt").map((_,0)).collectAsMap()
     // 广播字典
     val broadValues = spark.sparkContext.broadcast(stopwordsRDD)
 
